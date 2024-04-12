@@ -1,3 +1,5 @@
+'use client';
+
 import { Dispatch, SetStateAction, createContext, useState } from 'react';
 
 type ITypography = 'sans-serif' | 'serif' | 'monospace';
@@ -31,5 +33,5 @@ const DictionaryContextProvider = ({ children }: Props) => {
   );
 };
 
-export { DictionaryContextProvider };
+export { DictionaryContext, DictionaryContextProvider };
 export type { ITypography };

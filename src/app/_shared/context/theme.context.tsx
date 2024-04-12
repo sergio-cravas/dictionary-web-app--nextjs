@@ -1,4 +1,6 @@
-import { createContext, useCallback, useReducer, useState } from 'react';
+'use client';
+
+import { createContext, useCallback, useEffect, useState } from 'react';
 
 type ITheme = 'light' | 'dark';
 
@@ -21,6 +23,12 @@ type Props = {
 const ThemeContextProvider = ({ children }: Props) => {
   const [theme, setTheme] = useState<ITheme>(INITIAL_STATE.theme);
 
+  useEffect(() => {
+    const root = document.documentElement;
+
+    root.setAttribute('data-theme', theme);
+  }, [theme]);
+
   const toggleTheme = useCallback(() => {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
   }, []);
@@ -28,5 +36,5 @@ const ThemeContextProvider = ({ children }: Props) => {
   return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
 };
 
-export { ThemeContextProvider };
+export { ThemeContext, ThemeContextProvider };
 export type { ITheme };
