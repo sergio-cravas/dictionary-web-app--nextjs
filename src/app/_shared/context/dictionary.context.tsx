@@ -7,14 +7,14 @@ type ITypography = 'sans-serif' | 'serif' | 'monospace';
 type DictionaryContextProps = {
   word: string;
   typography: ITypography;
-  setWord: Dispatch<SetStateAction<string>>;
+  findWord: (text: string) => void;
   setTypography: Dispatch<SetStateAction<ITypography>>;
 };
 
 const INITIAL_STATE: DictionaryContextProps = {
   word: '',
   typography: 'sans-serif',
-  setWord: () => {},
+  findWord: () => {},
   setTypography: () => {},
 };
 
@@ -28,8 +28,14 @@ const DictionaryContextProvider = ({ children }: Props) => {
   const [word, setWord] = useState<string>(INITIAL_STATE.word);
   const [typography, setTypography] = useState<ITypography>(INITIAL_STATE.typography);
 
+  const handleOnFindWord = (text: string) => {
+    console.log(text);
+  };
+
   return (
-    <DictionaryContext.Provider value={{ word, setWord, typography, setTypography }}>{children}</DictionaryContext.Provider>
+    <DictionaryContext.Provider value={{ word, findWord: handleOnFindWord, typography, setTypography }}>
+      {children}
+    </DictionaryContext.Provider>
   );
 };
 
