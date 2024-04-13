@@ -1,0 +1,24 @@
+@mixin heading-large {
+  font-size: 64px;
+  line-height: 77px;
+}
+
+@mixin heading-medium {
+  font-size: 24px;
+  line-height: 29px;
+}
+
+@mixin heading-small {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+@mixin body-medium {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+@mixin body-small {
+  font-size: 14px;
+  line-height: 17px;
+}

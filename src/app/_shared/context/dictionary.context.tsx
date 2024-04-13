@@ -1,20 +1,25 @@
 'use client';
+import { Dispatch, SetStateAction, createContext, useCallback, useMemo, useState } from 'react';
 
-import { Dispatch, SetStateAction, createContext, useState } from 'react';
+import { IWord, IWordError } from '@/modules/domain/word';
+import { searchWord } from '@/modules/application/searchWord';
+import { createWordRepository } from '@/modules/infraestructure/wordRESTRepository';
 
 type ITypography = 'sans-serif' | 'serif' | 'monospace';
 
 type DictionaryContextProps = {
-  word: string;
+  word: IWord | undefined;
+  error: IWordError | undefined;
   typography: ITypography;
-  findWord: (text: string) => void;
+  searchWord: (text: string) => void;
   setTypography: Dispatch<SetStateAction<ITypography>>;
 };
 
 const INITIAL_STATE: DictionaryContextProps = {
-  word: '',
+  word: undefined,
+  error: undefined,
   typography: 'sans-serif',
-  findWord: () => {},
+  searchWord: () => {},
   setTypography: () => {},
 };
 
@@ -25,15 +30,31 @@ type Props = {
 };
 
 const DictionaryContextProvider = ({ children }: Props) => {
-  const [word, setWord] = useState<string>(INITIAL_STATE.word);
+  const [word, setWord] = useState<IWord | undefined>(INITIAL_STATE.word);
+  const [error, setError] = useState<IWordError | undefined>(undefined);
   const [typography, setTypography] = useState<ITypography>(INITIAL_STATE.typography);
 
-  const handleOnFindWord = (text: string) => {
-    console.log(text);
-  };
+  const wordRepository = useMemo(() => createWordRepository(), []);
+
+  const handleOnFindWord = useCallback(
+    async (text: string) => {
+      if (!text) {
+        setWord(undefined);
+        setError(undefined);
+
+        return;
+      }
+
+      const { word: _word, error: _error } = await searchWord(wordRepository)({ text });
+
+      setWord(_word);
+      setError(_error);
+    },
+    [wordRepository]
+  );
 
   return (
-    <DictionaryContext.Provider value={{ word, findWord: handleOnFindWord, typography, setTypography }}>
+    <DictionaryContext.Provider value={{ word, error, typography, searchWord: handleOnFindWord, setTypography }}>
       {children}
     </DictionaryContext.Provider>
   );
