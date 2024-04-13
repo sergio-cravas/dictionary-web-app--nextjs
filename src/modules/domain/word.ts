@@ -3,17 +3,23 @@ interface IWord {
   phonetic: string;
   phonetics: { text: string; audio: string }[];
   origin: string;
-  meanings: {
-    partOfSpeech: string;
-    definitions: {
-      definition: string;
-      example: string;
-      synonyms: string[];
-      antonyms: string[];
-    }[];
-  }[];
+  meanings: IMeaning[];
   license: { name: string; url: string };
   sourceUrls: string[];
+}
+
+interface IMeaning {
+  partOfSpeech: string;
+  definitions: IDefinition[];
+  synonyms: string[];
+  antonyms: string[];
+}
+
+interface IDefinition {
+  definition: string;
+  example: string;
+  synonyms: string[];
+  antonyms: string[];
 }
 
 interface IWordError {
@@ -22,4 +28,4 @@ interface IWordError {
   resolution: string;
 }
 
-export type { IWord, IWordError };
+export type { IWord, IWordError, IMeaning, IDefinition };

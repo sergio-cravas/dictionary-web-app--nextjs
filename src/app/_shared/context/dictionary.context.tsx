@@ -8,7 +8,8 @@ import { createWordRepository } from '@/modules/infraestructure/wordRESTReposito
 type ITypography = 'sans-serif' | 'serif' | 'monospace';
 
 type DictionaryContextProps = {
-  word: IWord | undefined;
+  word: string | undefined;
+  wordDefinition: IWord | undefined;
   error: IWordError | undefined;
   typography: ITypography;
   searchWord: (text: string) => void;
@@ -17,6 +18,7 @@ type DictionaryContextProps = {
 
 const INITIAL_STATE: DictionaryContextProps = {
   word: undefined,
+  wordDefinition: undefined,
   error: undefined,
   typography: 'sans-serif',
   searchWord: () => {},
@@ -30,7 +32,8 @@ type Props = {
 };
 
 const DictionaryContextProvider = ({ children }: Props) => {
-  const [word, setWord] = useState<IWord | undefined>(INITIAL_STATE.word);
+  const [word, setWord] = useState<string | undefined>(INITIAL_STATE.word);
+  const [wordDefinition, setWordDefinition] = useState<IWord | undefined>(INITIAL_STATE.wordDefinition);
   const [error, setError] = useState<IWordError | undefined>(undefined);
   const [typography, setTypography] = useState<ITypography>(INITIAL_STATE.typography);
 
@@ -41,20 +44,24 @@ const DictionaryContextProvider = ({ children }: Props) => {
       if (!text) {
         setWord(undefined);
         setError(undefined);
+        setWordDefinition(undefined);
 
         return;
       }
 
       const { word: _word, error: _error } = await searchWord(wordRepository)({ text });
 
-      setWord(_word);
+      setWord(text);
       setError(_error);
+      setWordDefinition(_word);
     },
     [wordRepository]
   );
 
   return (
-    <DictionaryContext.Provider value={{ word, error, typography, searchWord: handleOnFindWord, setTypography }}>
+    <DictionaryContext.Provider
+      value={{ word, wordDefinition, error, typography, searchWord: handleOnFindWord, setTypography }}
+    >
       {children}
     </DictionaryContext.Provider>
   );

@@ -2,8 +2,6 @@
 
 import styles from './header.module.scss';
 
-const Header = () => {
+export default function Header() {
   return <div className={styles.header}></div>;
-};
-
-export { Header };
+}
