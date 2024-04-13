@@ -3,6 +3,193 @@
 
 .definition {
   width: 100%;
+  margin-top: 45px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 40px;
+
+  &__heading {
+    display: flex;
+
+    &__content {
+      flex: 1;
+
+      display: flex;
+      flex-direction: column;
+
+      gap: 12px;
+
+      &__title {
+        @include heading-large;
+      }
+
+      &__phonetic {
+        @include heading-medium;
+
+        color: $primary;
+      }
+    }
+
+    &__play-button {
+      width: fit-content;
+      height: fit-content;
+
+      border: 0;
+      border-radius: 100%;
+      background-color: transparentize($color: $primary, $amount: 0.75);
+
+      cursor: pointer;
+      transition: 0.125s background-color ease-in;
+
+      &:hover {
+        background-color: transparentize($color: $primary, $amount: 0.65);
+      }
+
+      &:active {
+        background-color: transparentize($color: $primary, $amount: 0.7);
+      }
+    }
+  }
+
+  &__meaning {
+    display: flex;
+    flex-direction: column;
+
+    gap: 40px;
+
+    &__head {
+      display: flex;
+      align-items: center;
+
+      gap: 20px;
+
+      &__title {
+        @include heading-medium;
+
+        font-style: italic;
+      }
+    }
+
+    &__definitions {
+      display: flex;
+      flex-direction: column;
+
+      gap: 25px;
+
+      &__title {
+        @include heading-small;
+
+        color: $dark05;
+      }
+
+      &__content {
+        @include body-medium;
+
+        padding-left: 40px;
+
+        display: flex;
+        flex-direction: column;
+
+        gap: 12px;
+
+        &__example {
+          margin-top: 6px;
+
+          color: $dark05;
+
+          &::before {
+            content: '“';
+          }
+
+          &::after {
+            content: '”';
+          }
+        }
+
+        & li::marker {
+          color: $primary;
+        }
+      }
+    }
+
+    &__synonyms,
+    &__antonyms {
+      display: flex;
+      align-items: flex-end;
+
+      gap: 22px;
+
+      &__title {
+        @include heading-small;
+
+        color: $dark05;
+      }
+
+      &__list {
+        display: flex;
+        align-items: flex-end;
+
+        gap: 4px;
+
+        & > span {
+          @include body-medium;
+
+          color: $primary;
+          font-weight: 600;
+          text-decoration: underline;
+
+          cursor: pointer;
+
+          &:not(:last-child):after {
+            content: ', ';
+          }
+        }
+      }
+    }
+  }
+
+  &__separator {
+    width: 100%;
+    height: 1px;
+
+    background-color: $dark06;
+  }
+
+  &__source {
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+
+    &__content {
+      display: flex;
+      align-items: flex-end;
+
+      gap: 24px;
+
+      &__title {
+        @include body-small;
+
+        color: $dark05;
+      }
+
+      &__links {
+        display: flex;
+        align-items: flex-end;
+
+        gap: 16px;
+
+        &__item {
+          @include body-small;
+
+          display: flex;
+          gap: 8px;
+        }
+      }
+    }
+  }
 }
 
 .error-message {
