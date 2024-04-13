@@ -1,4 +1,4 @@
-import { useCallback, useContext } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
 import { PlayIcon } from '@/assets/icons/play';
@@ -7,9 +7,17 @@ import { IMeaning, IWord, IWordError } from '@/modules/domain/word';
 import { DictionaryContext } from '../../context';
 
 import styles from './definition.module.scss';
+import colors from '@/theme/colors.module.scss';
 
 const WordDefinition = ({ word }: { word: IWord }) => {
-  const { searchWord } = useContext(DictionaryContext);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const { wordDefinition, searchWord } = useContext(DictionaryContext);
+
+  const [phoneticAudio, setPhoneticAudio] = useState<{ text: string; audio: string } | undefined>();
+
+  useEffect(() => {
+    setPhoneticAudio(wordDefinition?.phonetics?.find((phonetic) => phonetic.audio));
+  }, [wordDefinition?.phonetics]);
 
   const handleOnClickWord = useCallback(
     (text: string) => {
@@ -18,16 +26,29 @@ const WordDefinition = ({ word }: { word: IWord }) => {
     [searchWord]
   );
 
+  const handleOnPlay = useCallback(() => {
+    if (audioRef?.current) audioRef.current.play();
+  }, []);
+
   return (
     <div className={styles.definition}>
       <div className={styles['definition__heading']}>
         <div className={styles['definition__heading__content']}>
           <h1 className={styles['definition__heading__content__title']}>{word.word}</h1>
-          <span className={styles['definition__heading__content__phonetic']}>{word.phonetic}</span>
+          <span className={styles['definition__heading__content__phonetic']}>{phoneticAudio?.text || word.phonetic}</span>
         </div>
 
-        <button className={styles['definition__heading__play-button']}>
-          <PlayIcon />
+        <button
+          disabled={!phoneticAudio}
+          className={[
+            styles['definition__heading__play-button'],
+            !phoneticAudio && styles['definition__heading__play-button--disabled'],
+          ].join(' ')}
+          onClick={handleOnPlay}
+        >
+          <PlayIcon color={!phoneticAudio ? colors.dark05 : undefined} />
+
+          <audio ref={audioRef} src={phoneticAudio?.audio} />
         </button>
       </div>
 

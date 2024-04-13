@@ -50,6 +50,11 @@
       &:active {
         background-color: transparentize($color: $primary, $amount: 0.7);
       }
+
+      &--disabled {
+        cursor: inherit;
+        background-color: transparentize($color: $dark05, $amount: 0.75) !important;
+      }
     }
   }
 
