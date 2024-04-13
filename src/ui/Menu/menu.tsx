@@ -25,7 +25,7 @@ export const Menu = ({ label, className, items = [] }: Props) => {
           {items.map((item) => (
             <div
               key={item.label}
-              className={[styles.menu__items__item, className].join(' ')}
+              className={[styles.menu__items__item, item.className].join(' ')}
               onClick={() => {
                 setIsOpen(false);
                 item.onClick();
