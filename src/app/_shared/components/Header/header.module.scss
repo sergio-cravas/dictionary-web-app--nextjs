@@ -1,2 +1,29 @@
+@import '@/theme/colors.module.scss';
+
 .header {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 26px;
+
+  &__logo {
+    margin-right: auto;
+  }
+
+  &__separator {
+    width: 1px;
+    height: 32px;
+
+    background-color: $dark06;
+  }
+
+  &__theme-toggler {
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+  }
 }

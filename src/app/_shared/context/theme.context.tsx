@@ -37,4 +37,4 @@ const ThemeContextProvider = ({ children }: Props) => {
 };
 
 export { ThemeContext, ThemeContextProvider };
-export type { ITheme };
+export type { ITheme, ThemeContextProps };
