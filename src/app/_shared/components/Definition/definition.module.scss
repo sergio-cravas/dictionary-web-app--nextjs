@@ -1,2 +1,36 @@
+@import '@/theme/texts.module.scss';
+@import '@/theme/colors.module.scss';
+
 .definition {
+  width: 100%;
+}
+
+.error-message {
+  width: 100%;
+  margin-top: 132px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  &__emoji {
+    font-size: 64px;
+
+    margin-bottom: 44px;
+  }
+
+  &__title {
+    @include heading-small;
+    font-weight: 600;
+
+    margin-bottom: 24px;
+  }
+
+  &__resolution {
+    @include body-small;
+
+    text-align: center;
+    color: $dark05;
+  }
 }
