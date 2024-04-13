@@ -13,7 +13,7 @@ type DictionaryContextProps = {
   error: IWordError | undefined;
   typography: ITypography;
   searchWord: (text: string) => void;
-  setTypography: Dispatch<SetStateAction<ITypography>>;
+  setTypography: (value: ITypography) => void;
 };
 
 const INITIAL_STATE: DictionaryContextProps = {
@@ -68,4 +68,4 @@ const DictionaryContextProvider = ({ children }: Props) => {
 };
 
 export { DictionaryContext, DictionaryContextProvider };
-export type { ITypography };
+export type { ITypography, DictionaryContextProps };

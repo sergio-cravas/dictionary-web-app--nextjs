@@ -1,0 +1,38 @@
+@import '@/theme/colors.module.scss';
+
+.switch {
+  width: 40px;
+  height: 20px;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  border: 0;
+  padding: 3px;
+  border-radius: 16px;
+  background-color: $dark05;
+
+  cursor: pointer;
+
+  &--disabled {
+    cursor: initial;
+  }
+
+  &__pebble {
+    position: absolute;
+
+    width: 14px;
+    height: 14px;
+
+    border-radius: 100%;
+    background-color: $white;
+
+    transition: all 0.25s;
+
+    &--active {
+      transform: translateX(150%);
+    }
+  }
+}
