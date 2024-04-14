@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { DictionaryContextProvider, ThemeContextProvider } from './_shared/context';
+import {
+  DictionaryContextProvider,
+  ThemeContextProvider,
+  TypographyContext,
+  TypographyContextProvider,
+} from './_shared/context';
+
+import { sans_serif } from '@/theme/fonts';
 
 import '@/theme/globals.scss';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -18,11 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <ThemeContextProvider>
-          <DictionaryContextProvider>{children}</DictionaryContextProvider>
-        </ThemeContextProvider>
-      </body>
+      <TypographyContextProvider>{children}</TypographyContextProvider>
     </html>
   );
 }
