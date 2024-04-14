@@ -22,7 +22,7 @@ type Props = {
 
 const ThemeContextProvider = ({ children }: Props) => {
   const [theme, setTheme] = useState<ITheme>(
-    window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light' || INITIAL_STATE.theme
+    window ? (window?.matchMedia('(prefers-color-scheme: dark)')?.matches ? 'dark' : 'light') : INITIAL_STATE.theme
   );
 
   useEffect(() => {
