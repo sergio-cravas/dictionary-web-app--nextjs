@@ -14,7 +14,7 @@ export const Menu = ({ label, className, items = [] }: Props) => {
 
   return (
     <div className={[styles.menu, className].join(' ')}>
-      <div className={styles.menu__label} onClick={() => setIsOpen(true)}>
+      <div className={styles.menu__label} onClick={() => setIsOpen((prev) => !prev)}>
         <span>{label}</span>
 
         <ArrowDownIcon />

@@ -33,6 +33,11 @@
     background-color: $white;
     box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.1);
 
+    @media (prefers-color-scheme: dark) {
+      background-color: $dark02;
+      box-shadow: 0px 5px 30px $primary;
+    }
+
     &__item {
       white-space: nowrap;
       font-weight: 600;
