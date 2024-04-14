@@ -1,7 +1,8 @@
+import { useState } from 'react';
+
 import { ArrowDownIcon } from '@/assets/icons/arrow-down';
 
 import styles from './menu.module.scss';
-import { useState } from 'react';
 
 type Props = {
   label: string;
@@ -14,7 +15,7 @@ export const Menu = ({ label, className, items = [] }: Props) => {
 
   return (
     <div className={[styles.menu, className].join(' ')}>
-      <div className={styles.menu__label} onClick={() => setIsOpen(true)}>
+      <div className={styles.menu__label} onClick={() => setIsOpen((prev) => !prev)}>
         <span>{label}</span>
 
         <ArrowDownIcon />
