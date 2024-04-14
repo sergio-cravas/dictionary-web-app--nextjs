@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import styles from './switch.module.scss';
 
@@ -10,6 +10,10 @@ type Props = {
 
 export const Switch = ({ defaultActive = false, isDisabled = false, onChange }: Props) => {
   const [isActive, setIsActive] = useState<boolean>(defaultActive);
+
+  useEffect(() => {
+    setIsActive(Boolean(defaultActive));
+  }, [defaultActive]);
 
   const handleOnChange = useCallback(
     (value: boolean) => {
