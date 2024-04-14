@@ -12,13 +12,13 @@
     width: 100%;
     padding: 20px 24px;
 
-    color: $dark03;
+    color: var(--color-text);
     font-weight: 600;
 
     border: none;
     outline: 0 solid transparent;
     border-radius: 16px;
-    background-color: $dark07;
+    background-color: var(--color-input-background);
 
     &::placeholder {
       opacity: 0.25;

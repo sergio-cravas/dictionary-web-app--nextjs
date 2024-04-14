@@ -40,7 +40,7 @@ export default function Header() {
       <div className={styles.header__separator} />
 
       <div className={styles['header__theme-toggler']}>
-        <Switch onChange={toggleTheme} />
+        <Switch defaultActive={theme === 'dark'} onChange={toggleTheme} />
 
         <MoonIcon color={theme === 'dark' ? colors.primary : undefined} />
       </div>
