@@ -1,7 +1,7 @@
 'use client';
 
 import { useContext, useMemo } from 'react';
-import { DictionaryContext, ThemeContext, ThemeContextProps, DictionaryContextProps } from '../../context';
+import { ThemeContext, ThemeContextProps, TypographyContextProps, TypographyContext } from '../../context';
 
 import { Lora } from 'next/font/google';
 import { Inter } from 'next/font/google';
@@ -20,7 +20,7 @@ import colors from '@/theme/colors.module.scss';
 
 export default function Header() {
   const { theme, toggleTheme } = useContext<ThemeContextProps>(ThemeContext);
-  const { typography, setTypography } = useContext<DictionaryContextProps>(DictionaryContext);
+  const { typography, setTypography } = useContext<TypographyContextProps>(TypographyContext);
 
   const typografyItems = useMemo(
     () => [
