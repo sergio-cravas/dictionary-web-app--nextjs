@@ -1,7 +1,8 @@
+import { useState } from 'react';
+
 import { ArrowDownIcon } from '@/assets/icons/arrow-down';
 
 import styles from './menu.module.scss';
-import { useState } from 'react';
 
 type Props = {
   label: string;
